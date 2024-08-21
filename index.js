@@ -1,99 +1,142 @@
-//---------------------------------------------------
-// ES / Node modules
+// // ---------------------------------------------------
+// // First class functions, higher order functions, callback functions,
+// // dynamic types, declarative / imperative programming
 
-import { adder } from './testFunc.js';
+// const test = function (test1input) {
+//   return console.log('test: ', test1input);
+// }
 
-//---------------------------------------------------
-// Values, operators and expressions
+// const test2 = function (test2input, callback) {
+//   console.log('test2: ', test2input);
+//   const test1input = 'test2'
+//   return callback(test1input);
+// }
 
-let testVar = 2;
-let testVar2 = (testVar **= 2);
-let testObj = {};
-const arrToSpread = [1, 2, 3, 4, 5, 6];
-testObj['test'] = [1, 2];
-let x, y;
-let a = 6;
-let b = 33;
-y = x = 'test';
-// console.log(testObj);
-// console.log(y);
-// console.log(a === b);
+// test2('test2inputVar', test);
+// test2(2, test);
+
+// const testArr = [1, 2, 3, 4, 5];
+
+// for (let i = 0; i < testArr.length; i++) {
+//   if(testArr[i] === 2) console.log('testArr 2: ', 2)
+// }
+
+// testArr.filter((elem) => elem === 2)
+
+// // --------------------------------------------------
+// // Variables, scope, globals
+
+// var testVar = 'testVar';
+// let testLet = 'testLet'
+// const testConst = 'testConst'
+
+// var someNum = 2
+
+// function testFunc() {
+//   if(someNum === 2) {
+//     var testVar = 'otherTestVar'
+//     let testLet = 'otherTestlet'
+//     testConst = 'otherTestconst'
+//   }
+// }
+
+// let globVar = 'glob var'
+// global.globalVar = globVar
+// console.log(global.globalVar)
+// console.log(window.globalVar)
+
+// testFunc()
+// console.log('testVarLetConst: ', testVar, testLet, testConst)
+
+// console.log('beforeinit: ', beforeinit, beforeinitlet)
+// var beforeinit
+// let beforeinitlet
+// const beforeTestconst
+
+// // ---------------------------------------------------
+// // Desctructuring, spread rest operators
+
+// const otherTestarr = [1, 2, 3, 4, 5]
+// const testObj = {a: 1, b: 2}
+// const [firstEl] = otherTestarr
+// console.log('firstel: ', firstEl)
+
+// const otherTestarrSpread = [...otherTestarr, 6, 7]
+// const otherTestobjSpread = {...testObj}
+// const testFuncRest = (...args) => console.log('args: ', args)
+
+// console.log('spread: ', otherTestarrSpread, otherTestobjSpread)
+// testFuncRest(otherTestarr)
+
+// // ---------------------------------------------------
+// // Values, operators and expressions
+
+// let testVar = 2;
+// let testVar2 = (testVar **= 2);
+// let testObj = {};
+// const arrToSpread = [1, 2, 3, 4, 5, 6];
+// testObj['test'] = [1, 2];
+// let x, y;
+// let a = 6;
+// let b = 33;
+// y = x = 'test';
 // console.log(a % 3);
 // console.log((a | b).toString(2));
 // console.log((a << 1).toString(2));
 // console.log((~a).toString(2));
 // console.log(a.toString(2));
 // console.log(typeof a);
-// console.log(testObj instanceof Object);
-// console.log(1 in testObj['test']);
-// Include some object in list (ex args)
-// Rest - unpack list ingo obj
-// console.log(...arrToSpread);
+// console.log(1 == '1');
+// console.log(1 === '1');
+// console.log(1 > '1');
+// console.log(1 > true);
+// console.log(1 > (undefined || null));
+// console.log(1 > undefined || null);
 
-//---------------------------------------------------
-// Var (global scope), let, const (reassigned)
+// // ---------------------------------------------------
+// // Data types, creation
 
-const varLetConstFunc = () => {
-  let letOne = 'value letOne';
-  const constOne = 'value constOne';
-  console.log('varLetConstFunc: ', letOne);
-};
+// let undefinedVar;
+// let nullVar = null;
+// console.log('undefined, null: ', undefinedVar, nullVar)
 
-// varLetConstFunc();
-// console.log(varOne);
-// console.log(letOne);
-// console.log(constOne);
-// Hoisted to the top as undefined
-var varOne = 'value varOne';
-varOne = 'updated value varOne';
+// let a = 10;
+// let b = a;
+// b = 20
+// console.log('ab: ', a, b)
 
-//---------------------------------------------------
-// Scope, this, closure
+// let obja = {a: 1}
+// let objb = obja
+// objb.a = 2
+// console.log('objab: ', obja, objb)
 
-// Reurn global or bound scope, undefined in strict
-// Closure - function with surrounding scope
-const test = {
-  value: 'abc',
-  value2: 'def',
-  func: function () {
-    return this.value;
-  },
-};
+// const obj1 = {a: 1} // Simple, not 4 many instances
+// const obj2 = new Object() // Useful for dynamic, verbose
+// obj2.a = 2
+// const obj3 = Object.create(obj2) // Use prototype, less intuitive
+// class NewObjClass { // Simple, less performant, no inherit
+//   constructor(key1) {
+//     this.key1 = key1
+//   }
+// }
+// const obj4 = new NewObjClass('test') // Good for OOP vals, verbose
+// const createObj = (key1) => ({key1: key1})
+// const obj5 = createObj('test')
+// const jsonStr = '{"key": "val"}'
+// const obj6 = JSON.parse(jsonStr)
 
-// Bind (always with one this) call (items) apply (array)
-function adder2(a, b) {
-  return a + b + this.value + this.value2;
-}
-const adder3 = adder2.bind(test);
+// console.log(parseInt('101', 2))
+// console.log(parseInt('101', 10))
+// const number = 101
+// console.log(number.toString(2))
+// console.log(number.toString(10))
 
-// Arrow function - can't bind call, only use global
-const arrowFunc = () => this;
+// // ---------------------------------------------------
+// // String
 
-// Class is a function with methods as props
-// Super - binding this in derived class
-class Example {
-  constructor() {
-    const proto = Object.getPrototypeOf(this);
-    console.log(Object.getOwnPropertyNames(proto));
-  }
-  first() {}
-  second() {}
-}
-
-// console.log(arrowFunc.bind('a')());
-// console.log(adder2.call(test, 'ghi', 'jkl'));
-// console.log(adder2.apply(test, ['ghi', 'jkl']));
-// console.log(adder3('ghi', 'jkl'));
-// console.log(test.func());
-// new Example();
-// console.log(this === window);
-
-//---------------------------------------------------
-// String
-
-const stringA = new String('String object');
-const stringB = 'String B';
-const stringC = 'String C';
+// const stringA = new String('String object');
+// const stringB = 'String B';
+// const stringC = 'String C';
 // console.log(stringB.charCodeAt(1));
 // console.log(stringB < stringC);
 // console.log(stringB.concat(stringC));
@@ -105,37 +148,37 @@ const stringC = 'String C';
 // console.log(stringB.split(' '));
 // console.log(stringB.substring(2));
 
-//---------------------------------------------------
-// Number
+// // ---------------------------------------------------
+// // Number
 
-const num = Number('2');
-const num2 = Number(1.23);
-const num3 = Number(null);
-const num4 = parseInt('0010');
+// const num = Number('2');
+// const num2 = Number(1.23);
+// const num3 = Number(null);
+// const num4 = parseInt('0010');
 // console.log(num4);
 
-//---------------------------------------------------
-// Date
+// // ---------------------------------------------------
+// // Date
 
-const [month, day] = [new Date().getMonth(), new Date().getDay()];
-const elapsed = Date.now() - 180000;
+// const [month, day] = [new Date().getMonth(), new Date().getDay()];
+// const elapsed = Date.now() - 180000;
 // console.log(new Date().toISOString());
 // console.log(new Date(2021, 11, 1));
 // console.log(month, day);
 // console.log(new Date(elapsed));
 
-//---------------------------------------------------
-// Array - list like objects with trav/mut methods
+// // ---------------------------------------------------
+// // Array - list like objects with trav/mut methods
 
-const testArr = [
-  ['one', 1],
-  ['two', 2],
-  ['two', 2],
-  ['three', 3],
-];
-const testMap = new Map(testArr);
-const flatMappedArr = testArr.flatMap((elem) => typeof elem[0] === 'string' && elem);
-const testSet = new Set(testArr);
+// const testArr = [
+//   ['one', 1],
+//   ['two', 2],
+//   ['two', 2],
+//   ['three', 3],
+// ];
+// const testMap = new Map(testArr);
+// const flatMappedArr = testArr.flatMap((elem) => typeof elem[0] === 'string' && elem);
+// const testSet = new Set(testArr);
 // testArr.push('four');
 // testArr.shift();
 // console.log(testArr);
@@ -148,155 +191,87 @@ const testSet = new Set(testArr);
 // console.log(testArr.concat(testArr));
 // console.log(flatMappedArr);
 
-//---------------------------------------------------
+// // ----------------------------------------------
+// // Falsy & error handling
+// const bool = [false, undefined, null, 0, NaN, ""].includes(true) ? true : false
+// if(!bool) throw new Error()
+
+// async function handlePromise() {
+//   try {
+//     const prom = new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         bool ? resolve('success') : reject('error')
+//       }, 1000)
+//     })
+//     // .then(() => console.log('done')).catch(err => console.log('promise-err: ', err))
+//     const result = await prom
+//   } catch (e) { // catches sync errors only and await
+//     console.log('caught error: ', e)
+//     throw new Error(e)
+//   } finally {
+//     console.log('promise result')
+//   }
+// }
+
+// handlePromise()
+
+// // ----------------------------------------------
+// // Iterations, iterables, iterators, generators
+
+// const testobj = { a: 1, b: 2, c: 3 };
+// const testarr = [1, 2, 3, 4];
+
+// Property names of objects
+// for (const prop in testobj) {
+//   if (prop === 'a') continue;
+//   if (prop === 'c') break;
+//   console.log(`${prop}: ${testobj[prop]}`);
+// }
+
+// for(const prop in testarr) {
+//     console.log(`${prop}: ${testarr[prop]}`)
+// }
+
+// Property values of iterables
+// for(const [k, v] of Object.entries(testobj)) {
+//     console.log('kv: ', k, v)
+// }
+
+// Iterable objects - arrs, strs, maps, sets, nodelists
+
+// const testIterable = {
+//   *[Symbol.iterator]() {
+//     yield 1;
+//     yield 2;
+//   },
+// };
+
+// console.log(typeof testIterable[Symbol.iterator]);
+
+// const fibonacci = {
+//   *[Symbol.iterator]() {
+//     let [prev, curr] = [0, 1];
+//     while (true) {
+//       yield curr;
+//       [prev, curr] = [curr, prev + curr];
+//     }
+//   },
+// };
+
+// const fibIterator = fibonacci[Symbol.iterator]();
+// console.log(fibIterator.next().value);
+// console.log(fibIterator.next().value);
+// console.log(fibIterator.next().value);
+
+// Scope, this, closure
+// Bind (always with one this) call (items) apply (array)
+// Arrow function - can't bind call, only use global
+// Class is a function with methods as props
+// Super - binding this in derived class
 // Map - KVP struct (key any value, size prop, entry order, iterable, fast, no serialize)
-
-// console.log(testMap.entries());
-
-//---------------------------------------------------
 // NodeList - DOM elems
-
-const nodeList = document.getElementById('sampleNode');
-// console.log(nodeList.childNodes);
-
-//---------------------------------------------------
 // Object
-
-const testObj2 = Object({ name: 'Lukasz', weight: 82 });
-// console.log(Object.getPrototypeOf(testObj2));
-
-//---------------------------------------------------
 // Math - built-in JS objects with methods
-
-//console.log(Math.abs(-2));
-// console.log(Math.floor(-2.12));
-// console.log(Math.pow(2, 4));
-// console.log(parseInt(Math.random() * (10 - 1) + 1));
-
-//---------------------------------------------------
 // Function - like procedure, set of statements with result
-// First class objects - treated like other variables, pure - no side effects, hoisted
-const testFunc2 = (a, b) => a + b;
-const testFunc3 = (a) => (b) => a + b;
-// Higher order and callback function with closure and object destructuring
-const testObj3 = {
-  a: 1,
-  b: 2,
-  c: { ca: 3 },
-  e(func) {
-    let { ca: d } = this.c;
-    func(this.a, this.b, d);
-  },
-};
-//testObj3.e(console.log);
-// Math props, currying, composition
-// console.log(testFunc2(testFunc2(1, 2), 3) === testFunc2(3, testFunc2(1, 2)));
-// console.log(testFunc2(1, 2) === testFunc2(2, 1));
-// console.log(testFunc2(1, 0) === 1);
-// console.log(testFunc3(3)(4));
-
-//---------------------------------------------------
 // OOL
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-}
-// Expression (assignment) vs declaration (class isn't hoisted), class is strict
-class NextPerson {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  // Private and static fields, getter
-  static type = 'human';
-  #legsNum = 2;
-
-  get introduction() {
-    return this.introduction;
-  }
-
-  set legs(num) {
-    num === 1 ? this.#legsNum && console.log(this.#legsNum) : console.log('Wrong legs num, old:', this.#legsNum);
-  }
-
-  introduction() {
-    return `I'm ${this.name} with ${this.#legsNum} legs`;
-  }
-}
-
-class European extends NextPerson {
-  constructor(name) {
-    super(name);
-  }
-
-  #legsNum = 3;
-
-  introduction() {
-    return `I'm ${this.name} with ${this.#legsNum * 2} legs`;
-  }
-}
-const lukasz = new Person('Lukasz', 32);
-const lukasz2 = Object.create(lukasz);
-const marta = new NextPerson('Marta', 31);
-const marta2 = new European('Marta', 31);
-// console.log(Object.getOwnPropertyNames(lukasz2));
-// console.log(marta2.introduction());
-// marta.legs = 1;
-
-//---------------------------------------------------
-// Async
-// Callback, promise, async
-
-const printString = (input) => {
-  setTimeout(console.log(input), Math.floor(Math.random() * 100) + 1);
-};
-
-const printStringCb = (input, callback) => {
-  setTimeout(() => {
-    console.log(input), callback();
-  }, Math.floor(Math.random() * 100) + 1);
-};
-
-const printStringPr = (input) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log(input);
-      resolve();
-    }, Math.floor(Math.random() * 100) + 1);
-  });
-};
-
-const printAllCb = () => {
-  printStringCb('A', () => {
-    printStringCb('B', () => {});
-  });
-};
-
-const printAllPr = () => {
-  printStringPr('A').then(() => printStringPr('B'));
-};
-
-const printAllAsync = async () => {
-  await printString('A');
-  await printString('B');
-};
-
-// printAllCb();
-// printAllPr();
-// printAllAsync();
-
-//---------------------------------------------------
-// ES5,6,7,8,9,12
-// 5,6- strict, arrows, template, let const, class, promise
-// 7,8- includes, async
-// 9,12- rest, replace, any, await
-// 2022- at, await
-
-//---------------------------------------------------
-// Typescript
-
-//---------------------------------------------------
-// Node
-
-//---------------------------------------------------
-// React
+// // Callback, promise, async
