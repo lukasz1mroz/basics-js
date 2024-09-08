@@ -237,6 +237,58 @@
 //     console.log('kv: ', k, v)
 // }
 
+// const fibIterator = fibonacci[Symbol.iterator]();
+// console.log(fibIterator.next().value);
+// console.log(fibIterator.next().value);
+// console.log(fibIterator.next().value);
+
+// const makeRangeIterator = (start = 0, end = Infinity, step = 1) => {
+//   let nextIndex = start;
+//   let iterationCount = 0;
+
+//   const rangeIterator = {
+//     next() {
+//       let result;
+//       if (nextIndex < end) {
+//         result = { value: nextIndex, done: false };
+//         nextIndex += step;
+//         iterationCount++;
+//         return result;
+//       }
+//       return { value: iterationCount, done: true };
+//     },
+//   };
+//   return rangeIterator;
+// };
+
+// const iter = makeRangeIterator(1, 10, 2);
+// let result = iter.next();
+// while (!result.done) {
+//   console.log(result.value);
+//   result = iter.next();
+// }
+
+// function* generatorFunc(start = 0, end = Infinity, step = 1) {
+//   let iterationCount = 0;
+
+//   for (let i = start; i < end; i += step) {
+//     iterationCount++;
+//     yield i;
+//   }
+
+//   return iterationCount;
+// }
+
+// const gen = generatorFunc(1, 10, 2);
+
+// console.log('Iterated over serquence: ', result.value);
+// console.log('generator: ', gen.next());
+// console.log('generator: ', gen.next());
+// console.log('generator: ', gen.next());
+// console.log('generator: ', gen.next());
+// console.log('generator: ', gen.next());
+// console.log('generator: ', gen.next());
+
 // Iterable objects - arrs, strs, maps, sets, nodelists
 
 // const testIterable = {
@@ -258,20 +310,113 @@
 //   },
 // };
 
-// const fibIterator = fibonacci[Symbol.iterator]();
-// console.log(fibIterator.next().value);
-// console.log(fibIterator.next().value);
-// console.log(fibIterator.next().value);
+// const obj = { a: 1, b: 2, c: 3 };
+// function* objGenerator(obj) {
+//   for (key of Object.keys(obj)) {
+//     yield [key, obj[key]];
+//   }
+// }
 
-// Scope, this, closure
+// const objGen = objGenerator(obj);
+// for (let [key, objKey] of objGen) {
+//   console.log('obj: ', key, objKey);
+// }
+
+// // ----------------------------------------------
+// // Objects, classes, OOP
+
+// function Animal() {
+//   this.type = 'default';
+//   this.display = function () {
+//     return console.log(this.type);
+//   };
+// }
+// Animal.prototype.lifespan = 40;
+
+// const animal2proto = {
+//   type: 'default',
+//   name: '2protoname',
+//   display: function () {
+//     return console.log(this.type);
+//   },
+//   get getName() {
+//     return this.name;
+//   },
+//   set setName(name) {
+//     this.name = name;
+//   },
+// };
+
+// class AnimalClass {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   display() {
+//     console.log(this.name);
+//   }
+//   get getName() {
+//     return this.name;
+//   }
+//   set setName(name) {
+//     this.name = name;
+//   }
+// }
+
+// const animal = new Animal();
+// const animal2 = Object.create(animal2proto);
+// const animal3 = new AnimalClass('howie');
+// animal.display(), animal2.display(), animal3.display();
+// console.log(
+//   'ownProps: ',
+//   Object.getOwnPropertyNames(animal),
+//   Object.getOwnPropertyNames(animal2),
+//   Object.getOwnPropertyNames(animal3),
+// );
+// console.log(
+//   'objs: ',
+//   Object.getPrototypeOf(animal),
+//   Object.getPrototypeOf(animal2),
+//   Object.getPrototypeOf(animal3),
+//   Object.getOwnPropertyNames(AnimalClass.prototype),
+// );
+// console.log(animal3.getName);
+// animal3.setName = 'bards';
+// console.log(animal3.getName);
+
+// for (prop in animal) {
+//   console.log(`${prop}: ${animal[prop]}`);
+// }
+
+// const MyClass = class {
+//   constructor(test1) {
+//     this.test1 = test1;
+//   }
+// };
+
+// const testClass = new MyClass('name');
+
+// // ----------------------------------------------
+// // Callback, promise, async
+
+// const callbackWrap = function(callback) {
+//     console.log('callbackWrap')
+//     return callback()
+// }
+
+// const callbackIn = function() {
+//     return console.log('callbackIn')
+// }
+
+// callbackWrap(callbackIn)
+
+// const promise = new Promise((res, rej) => {
+//     console.log('promise')
+//     res()
+// })
+
+// promise.then(() => console.log('chained'))
+
 // Bind (always with one this) call (items) apply (array)
 // Arrow function - can't bind call, only use global
-// Class is a function with methods as props
 // Super - binding this in derived class
 // Map - KVP struct (key any value, size prop, entry order, iterable, fast, no serialize)
-// NodeList - DOM elems
-// Object
-// Math - built-in JS objects with methods
-// Function - like procedure, set of statements with result
-// OOL
-// // Callback, promise, async
